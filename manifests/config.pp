@@ -69,6 +69,7 @@ class smokeping::config {
             if $smokeping::slave_color == '' { $slave_color = sprintf('%06d', fqdn_rand('999999')) }
             smokeping::slave { $::hostname:
                 location     => $smokeping::slave_location,
+                slave_name   => $smokeping::slave_name,
                 display_name => $display_name,
                 color        => $slave_color,
             }
