@@ -25,3 +25,6 @@ slaves = <%= slaves.join(' ') %>
 remark = <%= remark %>
 <% end -%>
 
+<% extras.each do |k,v| -%>
+<%= k %> = <%= v %>
+<% end -%>
