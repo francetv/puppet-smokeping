@@ -10,4 +10,8 @@ binary = <%= probe['binary'] %>
 <%= "#{k} = #{v}" %>
 <% end -%>
 
+<% if defined?(probe['extras']) then -%>
+<% probe['extras'].each do |k,v| -%><%= k %> = <%= v %><% end -%>
+<% end -%>
+
 <% end -%>
