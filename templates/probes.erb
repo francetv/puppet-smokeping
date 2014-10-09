@@ -6,8 +6,8 @@
 + <%= probe['name'] %>
 binary = <%= probe['binary'] %>
 
-<% probe['extras'].each_pair do |k,v| -%>
-<%= k %> = <%= v %>
+<% probe['extras'].each do |k,v| %>
+<%= "#{k} = #{v}" %>
 <% end -%>
 
 <% end -%>
