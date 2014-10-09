@@ -6,7 +6,7 @@
 + <%= probe['name'] %>
 binary = <%= probe['binary'] %>
 
-<% if defined?(probe['extras']) then -%>
+<% if probe['extras'].present? then -%>
 <% probe['extras'].each do |k,v| -%><%= k %> = <%= v %><% end -%>
 <% end -%>
 
