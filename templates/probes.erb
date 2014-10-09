@@ -7,7 +7,8 @@
 binary = <%= probe['binary'] %>
 
 <% if probe['extras'] != nil then -%>
-<% probe['extras'].each do |k,v| -%><%= k %> = <%= v %><% end -%>
+<% probe['extras'].each do |k,v| -%><%= k %> = <%= v %>
+<% end -%>
 <% end -%>
 
 <% end -%>
