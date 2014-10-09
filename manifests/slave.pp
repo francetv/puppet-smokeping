@@ -26,20 +26,24 @@ define smokeping::slave(
   }
 
   $random_value = fqdn_rand(1000000)
-  file { $smokeping::shared_secret:
-      mode    => '0600',
-      owner   => smokeping,
-      group   => smokeping,
-      content => $random_value,
-  }
-  @@concat::fragment { "${::hostname}-secret":
+  
+  if !defined(File[$smokeping::shared_secret]) {
+      file { $smokeping::shared_secret:
+          mode    => '0600',
+          owner   => smokeping,
+          group   => smokeping,
+          content => $random_value,
+      }
+    }
+  
+  @@concat::fragment { "${::hostname}-secret_${smokeping::slave_name}":
       target  => $smokeping::slave_secrets,
       order   => 10,
       content => "${smokeping::slave_name}:${random_value}\n",
       tag     => "smokeping-slave-secret-${master}",
   }
 
-  $filename = "${smokeping::slave_dir}/${::hostname}"
+  $filename = "${smokeping::slave_dir}/${smokeping::slave_name}"
   @@file { $filename:
       content => template('smokeping/slave.erb'),
       tag     => "smokeping-slave-${master}",
