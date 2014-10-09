@@ -1,7 +1,10 @@
 # === Parameters
 #
-# [*slave*]
+# [*location*]
 #   Location of slave
+#
+# [*slave_name*]
+#   Host name of the slave
 #
 # [*display_name*]
 #   Name of the slave
@@ -14,6 +17,7 @@
 #
 define smokeping::slave(
     $location,
+    $slave_name,
     $display_name,
     $color,
     $master = 'default',
@@ -36,14 +40,14 @@ define smokeping::slave(
       }
     }
   
-  @@concat::fragment { "${::hostname}-secret_${smokeping::slave_name}":
+  @@concat::fragment { "${::hostname}-secret_${slave_name}":
       target  => $smokeping::slave_secrets,
       order   => 10,
-      content => "${smokeping::slave_name}:${random_value}\n",
+      content => "${slave_name}:${random_value}\n",
       tag     => "smokeping-slave-secret-${master}",
   }
 
-  $filename = "${smokeping::slave_dir}/${smokeping::slave_name}"
+  $filename = "${smokeping::slave_dir}/${display_name}"
   @@file { $filename:
       content => template('smokeping/slave.erb'),
       tag     => "smokeping-slave-${master}",
