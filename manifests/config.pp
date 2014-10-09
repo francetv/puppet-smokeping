@@ -65,14 +65,6 @@ class smokeping::config {
     case $mode {
         ## Slave configuration
         'slave': {
-            if $smokeping::slave_display_name == '' { $display_name = $::hostname }
-            if $smokeping::slave_color == '' { $slave_color = sprintf('%06d', fqdn_rand('999999')) }
-            smokeping::slave { $::hostname:
-                location     => $smokeping::slave_location,
-                slave_name   => $smokeping::slave_name,
-                display_name => $display_name,
-                color        => $slave_color,
-            }
             # periodic restart to pick-up new config
             cron {
               'smokeping::periodic-restart':
