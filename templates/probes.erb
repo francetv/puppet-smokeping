@@ -5,7 +5,7 @@
 <% probes.each do |probe| -%>
 + <%= probe['name'] %>
 
-<% if probe['binary'] == '' then -%>
+<% if probe['binary'] != nil then -%>
 binary = <%= probe['binary'] %>
 <% end -%>
 
