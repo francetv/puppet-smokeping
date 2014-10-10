@@ -41,7 +41,7 @@ define smokeping::target (
     $host = '',
     $alerts = [],
     $slaves = [],
-    $extras = [],
+    $extras = undef,
     $nomasterpoll = false,
     $remark = '',
 ) {
