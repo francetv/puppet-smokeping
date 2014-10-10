@@ -29,6 +29,9 @@
 # [*remark*]
 #   Remark displayed on Website
 #
+# [*extras*]
+#   Extrafields
+#
 define smokeping::target (
     $pagetitle = '',
     $menu = '',
@@ -38,6 +41,7 @@ define smokeping::target (
     $host = '',
     $alerts = [],
     $slaves = [],
+    $extras = [],
     $nomasterpoll = false,
     $remark = '',
 ) {
